@@ -21,7 +21,6 @@ module OmniauthableUser
     end
 
     def self.find_or_create_from_twitter_omniauth(auth)
-      binding.pry
       user = where(provider: auth.provider, uid: auth.uid).first_or_create
       unless auth.info.image.nil?
         user.remote_avatar_url = auth.info.image.gsub('http://', 'https://').gsub('_normal', '')
