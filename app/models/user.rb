@@ -90,6 +90,10 @@ class User < ActiveRecord::Base
     !self.provider.present? && super
   end
 
+  def new_with_session(params, session)
+    binding.pry
+    new(params)
+  end
   private
 
   # Validates the size on an uploaded image.
