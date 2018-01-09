@@ -39,7 +39,7 @@ Rails.application.configure do
   config.react.variant = :production
   config.react.addons = true
   config.react.server_renderer_options = {
-    files: ['components.js'], # files to load for prerendering
+    files: ['server-side.js'], # files to load for prerendering
   }
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
