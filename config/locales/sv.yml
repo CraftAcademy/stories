@@ -111,6 +111,7 @@ sv:
     next: Nästa
     activate_post: Vill du aktivera detta inlägg?
     nothing_to_see: Har inget att visa här...
+    search_for: Sök efter
   activerecord:
     models:
       post: inlägg

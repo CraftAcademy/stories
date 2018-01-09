@@ -16,11 +16,12 @@ body.registrations.new, body.registrations.create {
     padding: 0.5em 0.5;
   }
   #error_explanation ul{
-    padding-left: 20px;
-    background-color: #f2dede;
-    border-color: #eed3d7;
-    color: #b94a48;
-    text-align: left;
+    padding-bottom: 20px !important;
+    padding-top: 20px !important;
+    background-color: #f2dede !important;
+    border-color: #eed3d7 !important;
+    color: #b94a48 !important;
+    text-align: left !important;
   }
   .remember-me {
     display: inline-block;

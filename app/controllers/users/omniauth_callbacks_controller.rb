@@ -7,8 +7,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def facebook
     @user = User.find_or_create_from_facebook_omniauth(auth_hash)
-
     if @user.persisted?
+      overwrite_authentication
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
       set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
     else
@@ -21,6 +21,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_or_create_from_twitter_omniauth(auth_hash)
 
     if @user.persisted?
+      overwrite_authentication
+
       sign_in_and_redirect @user, :event => :authentication
       set_flash_message(:notice, :success, :kind => "Twitter") if is_navigational_format?
     else
@@ -33,6 +35,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_or_create_from_google_omniauth(auth_hash)
 
     if @user.persisted?
+      overwrite_authentication
+
       sign_in_and_redirect @user, :event => :authentication
       set_flash_message(:notice, :success, :kind => "Google") if is_navigational_format?
     else
@@ -43,6 +47,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def failure
     redirect_to root_path
+  end
+
+  def overwrite_authentication
+    User.send(:define_method, :active_for_authentication?) do
+      true
+    end
   end
 
   private

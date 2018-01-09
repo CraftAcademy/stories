@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319132519) do
+ActiveRecord::Schema.define(version: 20180106105715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,15 @@ ActiveRecord::Schema.define(version: 20170319132519) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admins_on_email", unique: true
+  end
+
+  create_table "authentications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "provider"
+    t.string "uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_authentications_on_user_id"
   end
 
   create_table "bookmarks", id: :serial, force: :cascade do |t|
@@ -169,11 +178,12 @@ ActiveRecord::Schema.define(version: 20170319132519) do
     t.string "uid"
     t.string "slug"
     t.string "location"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.integer "authentications_count"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
+  add_foreign_key "authentications", "users"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "responses", "posts"
