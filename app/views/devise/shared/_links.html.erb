@@ -1,25 +1,37 @@
-<%- if controller_name != 'sessions' %>
-  <%= link_to t('application.sign_in'), new_session_path(resource_name) %><br />
-<% end -%>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to t('application.sign_up'), new_registration_path(resource_name) %><br />
+  <%= link_to t('application.sign_up'), new_registration_path(resource_name) %><br/>
 <% end -%>
 
 <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br/>
 <% end -%>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+  <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br/>
 <% end -%>
 
 <%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-  <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
+  <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br/>
 <% end -%>
 
 <%- if devise_mapping.omniauthable? %>
-  <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
-  <% end -%>
+  <p>Trött på att hålla reda på lösenord?</p>
+  <span class="omniauth-button">
+    <%= link_to user_facebook_omniauth_authorize_path, class: 'button facebook', style: 'color: white;' do %>
+      <%= icon('facebook-official') %><%= t('headings.sign_in__with', source: 'Facebook') %>
+    <% end %>
+  </span>
+
+  <span class="omniauth-button google">
+    <%= link_to user_google_oauth2_omniauth_authorize_path, class: 'button google', style: 'color: white;' do %>
+      <%= icon('google') %><%= t('headings.sign_in__with', source: 'Google') %>
+    <% end %>
+  </span>
+
+  <span class="omniauth-button twitter">
+    <%= link_to user_twitter_omniauth_authorize_path, class: 'button twitter', style: 'color: white;' do %>
+      <%= icon('twitter') %><%= t('headings.sign_in__with', source: 'Twitter') %>
+    <% end %>
+  </span>
 <% end -%>
