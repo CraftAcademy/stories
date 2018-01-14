@@ -77,6 +77,8 @@ group :development, :test do
   gem 'awesome_print'
   gem 'bundler-audit', '~> 0.6.0'
   gem 'pry-rails'
+  gem 'redis_test'
+  gem 'redis-namespace'
 end
 
 group :development do

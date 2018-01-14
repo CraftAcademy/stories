@@ -1,6 +1,8 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <h2><%= t('application.sign_up') %></h2>
+    <p>Att registrera ett konto innebär att du kan publicera egna inlägg och delta i samtalet genom att kommentera andra medlemmars inlägg.
+      <strong>Det är helt gratis att använda Torgny.io och vi håller dina uppgifter helt för oss själva.</strong> </p>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { autocomplete: 'off' }) do |f| %>
       <%= devise_error_messages! %>
@@ -24,7 +26,9 @@
       <% end %>
 
       <%= f.submit t('application.create_account'), class: "button green-inner-button" %>
-
+      <span class="pull-right">
+        Är du redan medlem? <%= link_to t('application.sign_in'), new_session_path(resource_name), class: 'button green-border-button' %>
+      </span>
     <% end %>
 
     <div class="devise-links">
