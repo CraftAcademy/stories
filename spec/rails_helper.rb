@@ -33,7 +33,14 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   config.before(:suite) do
+    Warden.test_mode!
+    RedisTest.start
+    RedisTest.configure(:default, :sidekiq)
     DatabaseCleaner.clean_with :truncation
+  end
+
+  config.after(:suite) do
+    RedisTest.stop
   end
 
   config.before(:each) do |example|
@@ -43,18 +50,16 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    RedisTest.clear
+
   end
 
   config.include Devise::TestHelpers, :type => :controller
   config.include ControllerMacros, :type => :controller
-
   config.include Features, :type => :feature
-
   config.include Warden::Test::Helpers
-  config.before :suite do
-    Warden.test_mode!
-  end
-  config.infer_spec_type_from_file_location!
 
+  config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+
 end
