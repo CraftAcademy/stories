@@ -9,7 +9,6 @@ class SearchUserListItem extends React.Component {
                             username: this.props.user.username,
                             value: this.props.user.isVerifiedMember
                         }}/>
-                    <span dangerouslySetInnerHTML={{__html: this.props.user.username}}/>
                     <span dangerouslySetInnerHTML={{__html: this.props.user.isEditor}}/>
                 </a>
             </li>
