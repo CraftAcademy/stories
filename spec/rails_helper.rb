@@ -58,6 +58,7 @@ RSpec.configure do |config|
   config.include ControllerMacros, :type => :controller
   config.include Features, :type => :feature
   config.include Warden::Test::Helpers
+  config.include FactoryBot::Syntax::Methods
 
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!

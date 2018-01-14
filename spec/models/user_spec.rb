@@ -139,4 +139,13 @@ RSpec.describe User, type: :model do
 
     it "gets upto 25 users not including self"
   end
+
+  describe '#badges' do
+    subject {create(:user)}
+
+    it {is_expected.to respond_to :badges}
+    it {is_expected.to respond_to :editor?}
+    it {is_expected.to respond_to :verified_member?}
+
+  end
 end

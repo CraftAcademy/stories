@@ -31,6 +31,6 @@ module UserFollowing
   end
 
   def people_to_follow
-    User.where.not(id: following_ids + [self.id]).limit(25).order("RANDOM()")
+    User.where.not(id: following_ids + [self.id]).limit(25).order('RANDOM()')
   end
 end

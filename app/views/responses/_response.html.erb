@@ -2,7 +2,7 @@
   <div class="post-metadata">
     <%= avatar_for response.user, size: 40 %>
     <div class="post-info">
-      <%= link_to response.username, response.user %><br/>
+      <%= link_to react_component('UserNameWithStatus',  { user: {username: response.user.username, value: response.user.verified_member?}}), response.user %><br/>
       <small><%= [time_ago_in_words(response.created_at), t('application.ago')].join(' ') %> </small>
     </div>
   </div>

@@ -3,6 +3,7 @@
     <header class="hero">
       <div class="profile-info">
         <h1 class="hero-title"><%= @user.username %></h1>
+        <small><%= 'Redaktör' if @user.editor? %></small>
         <% if @user.description.present? %>
           <div class="hero-description">
             <p>

@@ -3,7 +3,11 @@
     <div class="post-metadata">
       <%= avatar_for(current_user, size: 40) %>
       <div class="post-info">
-        <%= link_to current_user.username, current_user %><br/>
+        <%= link_to react_component('UserNameWithStatus',  { user: {username: current_user.username, value: current_user.verified_member?}}), current_user %>
+
+        <%#= link_to current_user.username, current_user %>
+        <%#= react_component('UserVerifiedStatus', {value: current_user.verified_member?}) %>
+        <br/>
         <small><%= t('application.edit') %></small>
       </div>
     </div>

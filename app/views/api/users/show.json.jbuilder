@@ -3,6 +3,8 @@ json.username @user.username
 json.description @user.description
 json.location @user.location
 json.avatar_image_tag avatar_for(@user, size: 50)
+json.isEditor @user.editor?
+json.isVerifiedMember @user.verified_member?
 json.urlPath user_path(@user)
 json.followingCount @user.following.size
 json.followerCount @user.followers.size

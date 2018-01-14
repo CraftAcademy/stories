@@ -22,6 +22,7 @@ gem 'omniauth-google-oauth2'
 
 # Front-end
 gem 'react-rails', '1.10.0'
+gem 'react-rails-img'
 gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'font-awesome-sass'
@@ -36,6 +37,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'browser'
 
 gem 'friendly_id', '~> 5.2', '>= 5.2.3'
+
+# Merit and Badges
+gem 'merit'
 
 # Image upload
 gem 'carrierwave'

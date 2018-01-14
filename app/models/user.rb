@@ -25,6 +25,8 @@
 #
 
 class User < ActiveRecord::Base
+  has_merit
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -90,10 +92,14 @@ class User < ActiveRecord::Base
     !self.provider.present? && super
   end
 
-  def new_with_session(params, session)
-    binding.pry
-    new(params)
+  def editor?
+    self.badges.include?(Merit::Badge.find(900))
   end
+
+  def verified_member?
+    self.badges.include?(Merit::Badge.find(100))
+  end
+
   private
 
   # Validates the size on an uploaded image.
