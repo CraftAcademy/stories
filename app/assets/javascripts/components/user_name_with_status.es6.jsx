@@ -4,7 +4,7 @@ class UserNameWithStatus extends React.Component {
     displayStatus() {
         if (this.props.user.value === true) {
             return (
-                  <Img src="verified.svg" style={this.cssStyles()} />
+                  <Img src="verified.svg" style={this.cssStyles()} data-toggle={'tooltip'} data-placement={'right'} title={'Verifierad medlem'} />
 
             )
         }
@@ -12,7 +12,7 @@ class UserNameWithStatus extends React.Component {
 
     render() {
         return (
-            <span data-toggle="tooltip" data-placement={'right'} title={'Verifierad medlem'}>
+            <span>
                 {this.props.user.username } { this.displayStatus()}
             </span>
         )
