@@ -50,7 +50,9 @@
               <div class="top-stories-links">
                 <%= link_to post.title, post, class: 'post-title' %><br/>
                 <small>
-                  <%= react_component('PopoverLink', {user_id: post.user.id, url: user_path(post.user), children: post.username}) %>
+                  <%= react_component('PopoverLink', {user_id: post.user.id,
+                                                      url: user_path(post.user),
+                                                      children: {username: post.user.username, value: post.user.verified_member?}}) %>
                 </small>
               </div>
             </li>
