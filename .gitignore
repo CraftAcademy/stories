@@ -35,3 +35,4 @@ brakeman.html
 /node_modules
 
 dump.rdb
+latest.*
