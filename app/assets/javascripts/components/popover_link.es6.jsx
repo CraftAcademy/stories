@@ -12,8 +12,8 @@ class PopoverLink extends React.Component {
                   onMouseLeave={this.handleMouseLeave.bind(this)}
             >
         <a href={this.props.url}>
-          {<UserNameWithStatus
-              user={{username: this.props.children.username, value: this.props.children.value}}/>}
+          <UserNameWithStatus
+              user={{username: this.props.children.username, value: this.props.children.value}}/>
 
         </a>
                 {this.renderPopover()}
