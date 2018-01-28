@@ -1,7 +1,6 @@
 class UserFollowContainer extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = { followerCount: this.props.followerCount };
   }
 

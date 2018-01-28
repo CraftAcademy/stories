@@ -5,7 +5,7 @@
     <% end %>
 
     <div class="pull-right">
-      <%= render partial: 'posts/social_share', locals: { post: @post } %>
+      <%= render partial: 'posts/social_share', locals: {post: @post} %>
     </div>
     <%= render 'post_metadata', post: @post %>
 
@@ -28,7 +28,7 @@
 
     <div class="post-stats clearfix">
       <div class="pull-left">
-        <%= render partial: 'posts/likes', locals: { post: @post } %>
+        <%= render partial: 'posts/likes', locals: {post: @post} %>
       </div>
       <div class="pull-left">
         <%= link_to post_path(@post, anchor: 'responses'), class: "response-icon-wrapper" do %>
@@ -38,7 +38,7 @@
       </div>
 
       <div class="pull-right">
-        <%= render partial: 'posts/bookmarks', locals: { post: @post } %>
+        <%= render partial: 'posts/bookmarks', locals: {post: @post} %>
       </div>
     </div>
 
@@ -46,7 +46,7 @@
       <div clas="author-metadata">
         <%= avatar_for @post.user, size: 50 %>
         <div class="username-description">
-          <h4><%= @post.user.username %></h4>
+          <h4><%= react_component('UserNameWithStatus',  { user: {username: @post.user.username, value: @post.user.verified_member?}}) %></h4>
           <p><%= @post.user.description %></p>
         </div>
       </div>
@@ -60,14 +60,14 @@
       </div>
     <% end %>
   </div>
-</div> 
+</div>
 
 <div class="post-show-footer row" data-animation="fadeInUp-fadeOutDown">
   <% if @related_posts.any? %>
     <div class="col-xs-10 col-md-6 col-xs-offset-1 col-md-offset-3 main-content related-stories">
       <h4 class="small-heading"><%= t('headings.related_posts') %></h4>
       <% @related_posts.each do |post| %>
-        <%= render partial: 'posts/post_list_item', locals: { post: post } %>
+        <%= render partial: 'posts/post_list_item', locals: {post: post} %>
       <% end %>
     </div>
   <% end %>
@@ -75,15 +75,15 @@
   <div id="responses" class="col-xs-10 col-md-6 col-xs-offset-1 col-md-offset-3 main-content">
     <h4 class="small-heading"><%= t('headings.responses') %></h4>
     <% if user_signed_in? %>
-      <%= render partial: 'posts/response_editor', locals: { post: @post } %>
+      <%= render partial: 'posts/response_editor', locals: {post: @post} %>
     <% end %>
 
     <div data-behavior="responses-list">
       <% if @responses.any? %>
-          <%= render @responses %>
+        <%= render @responses %>
       <% end %>
     </div>
   </div>
 </div>
 
-<%= render partial: 'posts/metadata_bar', locals: { post: @post } %>
+<%= render partial: 'posts/metadata_bar', locals: {post: @post} %>

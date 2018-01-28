@@ -1,6 +1,7 @@
 json.array! @following do |user|
   json.id user.id
   json.username user.username
+  json.isVerifiedMember user.verified_member?
   json.avatar_image_tag avatar_for(user, size: 50)
   json.description user.description
   json.urlPath user_path(user)

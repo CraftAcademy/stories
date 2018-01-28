@@ -1,7 +1,7 @@
 <div class="inline-editor" id="inline-editor" data-page="inline-editor">
   <div class="editor-metadata">
     <%= avatar_for(current_user, size: 40) %>
-    <strong class="editor-username"><%= current_user.username %></strong>
+    <strong class="editor-username"><%= react_component('UserNameWithStatus',  { user: {username: current_user.username, value: current_user.verified_member?}}) %></strong>
   </div>
   <%= form_for @dashboard.new_post, url: post_create_and_edit_path, html: { multipart: true, class: "editor-form", autocomplete: "off" } do |f| %>
     <div class="form-group">

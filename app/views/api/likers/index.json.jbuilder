@@ -1,6 +1,7 @@
 json.array! @likers do |liker|
   json.id liker.id
   json.username liker.username
+  json.isVerifiedMember liker.verified_member?
   json.avatar_image_tag avatar_for(liker, size: 50)
   json.description liker.description
   json.urlPath user_path(liker)

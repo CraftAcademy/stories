@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180106105715) do
+ActiveRecord::Schema.define(version: 20180114180445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admins", id: :serial, force: :cascade do |t|
+  create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.datetime "created_at", null: false
@@ -23,26 +23,27 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
-  create_table "authentications", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "provider"
-    t.string "uid"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_authentications_on_user_id"
+  create_table "badges_sashes", force: :cascade do |t|
+    t.integer "badge_id"
+    t.integer "sash_id"
+    t.boolean "notified_user", default: false
+    t.datetime "created_at"
+    t.index ["badge_id", "sash_id"], name: "index_badges_sashes_on_badge_id_and_sash_id"
+    t.index ["badge_id"], name: "index_badges_sashes_on_badge_id"
+    t.index ["sash_id"], name: "index_badges_sashes_on_sash_id"
   end
 
-  create_table "bookmarks", id: :serial, force: :cascade do |t|
+  create_table "bookmarks", force: :cascade do |t|
     t.string "bookmarkable_type"
     t.integer "bookmarkable_id"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bookmarkable_type", "bookmarkable_id"], name: "index_bookmarks_on_bookmarkable_type_and_bookmarkable_id"
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
-  create_table "friendly_id_slugs", id: :serial, force: :cascade do |t|
+  create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -54,7 +55,7 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
-  create_table "interests", id: :serial, force: :cascade do |t|
+  create_table "interests", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "tag_id"
     t.datetime "created_at", null: false
@@ -64,7 +65,7 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.index ["tag_id"], name: "index_interests_on_tag_id"
   end
 
-  create_table "likes", id: :serial, force: :cascade do |t|
+  create_table "likes", force: :cascade do |t|
     t.string "likeable_type"
     t.integer "likeable_id"
     t.integer "user_id"
@@ -74,7 +75,42 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
-  create_table "notifications", id: :serial, force: :cascade do |t|
+  create_table "merit_actions", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "action_method"
+    t.integer "action_value"
+    t.boolean "had_errors", default: false
+    t.string "target_model"
+    t.integer "target_id"
+    t.text "target_data"
+    t.boolean "processed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "merit_activity_logs", force: :cascade do |t|
+    t.integer "action_id"
+    t.string "related_change_type"
+    t.integer "related_change_id"
+    t.string "description"
+    t.datetime "created_at"
+  end
+
+  create_table "merit_score_points", force: :cascade do |t|
+    t.bigint "score_id"
+    t.integer "num_points", default: 0
+    t.string "log"
+    t.datetime "created_at"
+    t.index ["score_id"], name: "index_merit_score_points_on_score_id"
+  end
+
+  create_table "merit_scores", force: :cascade do |t|
+    t.bigint "sash_id"
+    t.string "category", default: "default"
+    t.index ["sash_id"], name: "index_merit_scores_on_sash_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
     t.integer "recipient_id"
     t.integer "actor_id"
     t.string "action"
@@ -88,12 +124,12 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.index ["recipient_id"], name: "index_notifications_on_recipient_id"
   end
 
-  create_table "posts", id: :serial, force: :cascade do |t|
+  create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "picture"
     t.integer "likes_count", default: 0
     t.datetime "published_at"
@@ -106,7 +142,7 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "relationships", id: :serial, force: :cascade do |t|
+  create_table "relationships", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", null: false
@@ -116,10 +152,10 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
-  create_table "responses", id: :serial, force: :cascade do |t|
+  create_table "responses", force: :cascade do |t|
     t.text "body"
-    t.integer "post_id"
-    t.integer "user_id"
+    t.bigint "post_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "likes_count", default: 0
@@ -127,7 +163,12 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.index ["user_id"], name: "index_responses_on_user_id"
   end
 
-  create_table "tag_relationships", id: :serial, force: :cascade do |t|
+  create_table "sashes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tag_relationships", force: :cascade do |t|
     t.integer "tag_id", null: false
     t.integer "related_tag_id", null: false
     t.integer "relevance", default: 0, null: false
@@ -138,16 +179,16 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.index ["tag_id"], name: "index_tag_relationships_on_tag_id"
   end
 
-  create_table "taggings", id: :serial, force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "tag_id"
+  create_table "taggings", force: :cascade do |t|
+    t.bigint "post_id"
+    t.bigint "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_taggings_on_post_id"
     t.index ["tag_id"], name: "index_taggings_on_tag_id"
   end
 
-  create_table "tags", id: :serial, force: :cascade do |t|
+  create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -158,7 +199,7 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.index ["slug"], name: "index_tags_on_slug", unique: true
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -178,12 +219,12 @@ ActiveRecord::Schema.define(version: 20180106105715) do
     t.string "uid"
     t.string "slug"
     t.string "location"
-    t.integer "authentications_count"
+    t.integer "sash_id"
+    t.integer "level", default: 0
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
-  add_foreign_key "authentications", "users"
   add_foreign_key "bookmarks", "users"
   add_foreign_key "posts", "users"
   add_foreign_key "responses", "posts"

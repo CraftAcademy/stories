@@ -2,7 +2,7 @@
   <div class="hero-wrapper">
     <header class="hero">
       <div class="profile-info">
-        <h1 class="hero-title"><%= @user.username %></h1>
+        <h1 class="hero-title"><%= react_component('UserNameWithStatus',  { user: {username: @user.username, value: @user.verified_member?}}) %></h1>
         <p class="hero-description"><%= @user.description %></p>
       </div>
       <div class="hero-avatar">
@@ -15,9 +15,8 @@
     </div>
 
     <% if user_signed_in? && current_user?(@user) %>
-      <%= link_to "Edit", edit_user_path(@user), class: 'button green-border-button' %>
+      <%= link_to t('application.edit'), edit_user_path(@user), class: 'button green-border-button' %>
     <% end %>
-
     <%= follow_button_for(@user) %>
   </div>
 </div>

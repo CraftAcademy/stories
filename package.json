@@ -19,5 +19,7 @@
     "url": "https://github.com/tochman/stories/issues"
   },
   "homepage": "https://github.com/tochman/stories#readme",
-  "dependencies": {}
+  "dependencies": {
+    "react-lightweight-tooltip": "^1.0.0"
+  }
 }

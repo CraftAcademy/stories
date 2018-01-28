@@ -1,5 +1,4 @@
 <div class="col-md-6 col-md-offset-1 dashboard-main-content">
-
   <% unless @dashboard.top_stories? %>
     <% if user_signed_in? && current_page?('/') %>
       <div data-animation="fadeInUp-fadeOutDown">
@@ -7,7 +6,8 @@
       </div>
     <% end %>
     <div class="posts-wrapper" data-behavior="endless-scroll" data-animation="fadeInUp-fadeOutDown">
-      <%= render @dashboard.posts %>
+      <%= render 'posts/top_stories', posts: @dashboard.posts %>
+
     </div>
   <% else %>
     <div class="posts-wrapper" data-animation="fadeInUp-fadeOutDown">
@@ -20,15 +20,14 @@
       <%= will_paginate @dashboard.posts %>
     </div>
   <% end %>
-
 </div>
-
 <% content_for :sidebar do %>
   <aside class="col-md-4 main-sidebar">
     <% if user_signed_in? %>
       <h4 class="small-heading border-top"><%= t('headings.featured_tags') %></h4>
       <%= react_component('TagList', {tags: @dashboard.featured_tags}) %>
     <% end %>
+
     <% if user_signed_in? %>
       <div class="flex-container border-top">
         <h4 class="small-heading"><%= t('headings.tags_you_follow') %></h4><%= react_component('AddTagButton') %>
@@ -37,7 +36,6 @@
 
       <%= react_component('FollowSuggestionsContainer') %>
     <% end %>
-
     <% unless @dashboard.filtered? %>
       <h4 class="small-heading border-top"><%= t('headings.top_stories') %></h4>
       <div class="sidebar-top-stories">
@@ -50,7 +48,9 @@
               <div class="top-stories-links">
                 <%= link_to post.title, post, class: 'post-title' %><br/>
                 <small>
-                  <%= react_component('PopoverLink', {user_id: post.user.id, url: user_path(post.user), children: post.username}) %>
+                  <%= react_component('PopoverLink', {user_id: post.user.id,
+                                                      url: user_path(post.user),
+                                                      children: {username: post.user.username, value: post.user.verified_member?}}) %>
                 </small>
               </div>
             </li>
