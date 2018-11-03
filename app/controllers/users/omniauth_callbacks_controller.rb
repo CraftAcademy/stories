@@ -1,18 +1,18 @@
-class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
+# frozen_string_literal: true
 
+class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # userful debugging code, insert the following to see the response from oauth
   # provider:
   # render :text => "<pre>" + env["omniauth.auth"].to_yaml and return
-
 
   def facebook
     @user = User.find_or_create_from_facebook_omniauth(auth_hash)
     if @user.persisted?
       overwrite_authentication
-      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
-      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+      sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
+      set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
     else
-      session["devise.user_attributes"] = @user.attributes
+      session['devise.user_attributes'] = @user.attributes
       redirect_to new_user_registration_url
     end
   end
@@ -23,10 +23,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       overwrite_authentication
 
-      sign_in_and_redirect @user, :event => :authentication
-      set_flash_message(:notice, :success, :kind => "Twitter") if is_navigational_format?
+      sign_in_and_redirect @user, event: :authentication
+      set_flash_message(:notice, :success, kind: 'Twitter') if is_navigational_format?
     else
-      session["devise.user_attributes"] = @user.attributes
+      session['devise.user_attributes'] = @user.attributes
       redirect_to new_user_registration_url
     end
   end
@@ -37,10 +37,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       overwrite_authentication
 
-      sign_in_and_redirect @user, :event => :authentication
-      set_flash_message(:notice, :success, :kind => "Google") if is_navigational_format?
+      sign_in_and_redirect @user, event: :authentication
+      set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
     else
-      session["devise.user_attributes"] = @user.attributes
+      session['devise.user_attributes'] = @user.attributes
       redirect_to new_user_registration_url
     end
   end
@@ -57,7 +57,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   private
 
-    def auth_hash
-      request.env["omniauth.auth"]
-    end
+  def auth_hash
+    request.env['omniauth.auth']
+  end
 end

@@ -7,14 +7,14 @@
         <% if @user.description.present? %>
           <div class="hero-description">
             <p>
-              <%= icon('book') %><%= @user.description %>
+              <%= icon('fab', 'book') %><%= @user.description %>
             </p>
           </div>
         <% end %>
         <% if @user.location.present? %>
           <div class="hero-location">
             <p>
-              <%= icon('map-marker') %><%= @user.location %>
+              <%= icon('fab', 'map-marker') %><%= @user.location %>
             </p>
           </div>
         <% end %>

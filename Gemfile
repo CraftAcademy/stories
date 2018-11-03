@@ -5,19 +5,19 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.4.0'
+ruby '2.5.1'
 
-gem 'rails', '~> 5.1.4'
-gem 'pg', '~> 0.18'
-gem 'puma', '~> 3.0'
-gem 'railties', '< 5.2', '>= 4.1.0'
+gem 'rails', '5.2.1'
+gem 'pg'
+gem 'puma'
+gem 'railties'
 gem 'i18n-js'
 gem 'newrelic_rpm'
 
 # Auth
 gem 'devise'
 gem 'omniauth-facebook', '~> 4.0'
-gem 'omniauth-twitter'
+# gem 'omniauth-twitter'
 gem 'omniauth-google-oauth2'
 
 # Front-end
@@ -39,7 +39,7 @@ gem 'browser'
 gem 'friendly_id', '~> 5.2', '>= 5.2.3'
 
 # Merit and Badges
-gem 'merit'
+gem 'merit', '~> 3.0', '>= 3.0.2'
 
 # Image upload
 gem 'carrierwave'
@@ -76,7 +76,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
-  gem 'selenium-webdriver', '~> 2.48.1'
+  gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'awesome_print'
   gem 'bundler-audit', '~> 0.6.0'

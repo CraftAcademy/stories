@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -31,19 +33,19 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook, :twitter, :google_oauth2]
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2]
   validates :username, presence: true
   validate :avatar_image_size
 
   has_many :posts, dependent: :destroy
   has_many :responses, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :liked_posts, through: :likes, source: :likeable, source_type: "Post"
-  has_many :liked_responses, through: :likes, source: :likeable, source_type: "Response"
+  has_many :liked_posts, through: :likes, source: :likeable, source_type: 'Post'
+  has_many :liked_responses, through: :likes, source: :likeable, source_type: 'Response'
 
   has_many :bookmarks, dependent: :destroy
-  has_many :bookmarked_posts, through: :bookmarks, source: :bookmarkable, source_type: "Post"
-  has_many :bookmarked_responses, through: :bookmarks, source: :bookmarkable, source_type: "Response"
+  has_many :bookmarked_posts, through: :bookmarks, source: :bookmarkable, source_type: 'Post'
+  has_many :bookmarked_responses, through: :bookmarks, source: :bookmarkable, source_type: 'Response'
 
   has_many :notifications, dependent: :destroy, foreign_key: :recipient_id
 
@@ -58,16 +60,16 @@ class User < ActiveRecord::Base
   include OmniauthableUser
 
   extend FriendlyId
-  friendly_id :username, use: [:slugged, :finders]
+  friendly_id :username, use: %i[slugged finders]
 
   def add_like_to(likeable_obj)
     likes.where(likeable: likeable_obj).first_or_create
-    self.reload
+    reload
   end
 
   def remove_like_from(likeable_obj)
     likes.where(likeable: likeable_obj).destroy_all
-    self.reload
+    reload
   end
 
   def liked?(likeable_obj)
@@ -76,12 +78,12 @@ class User < ActiveRecord::Base
 
   def add_bookmark_to(bookmarkable_obj)
     bookmarks.where(bookmarkable: bookmarkable_obj).first_or_create
-    self.reload
+    reload
   end
 
   def remove_bookmark_from(bookmarkable_obj)
     bookmarks.where(bookmarkable: bookmarkable_obj).destroy_all
-    self.reload
+    reload
   end
 
   def bookmarked?(bookmarkable_obj)
@@ -89,24 +91,22 @@ class User < ActiveRecord::Base
   end
 
   def active_for_authentication?
-    !self.provider.present? && super
+    !provider.present? && super
   end
 
   def editor?
-    self.badges.include?(Merit::Badge.find(900))
+    badges.include?(Merit::Badge.find(900))
   end
 
   def verified_member?
-    self.badges.include?(Merit::Badge.find(100))
+    badges.include?(Merit::Badge.find(100))
   end
 
   private
 
   # Validates the size on an uploaded image.
   def avatar_image_size
-    if avatar.size > 5.megabytes
-      errors.add(:avatar, "should be less than 5MB")
-    end
+    errors.add(:avatar, 'should be less than 5MB') if avatar.size > 5.megabytes
   end
 
   # Returns a string of the objects class name downcased.
@@ -116,10 +116,10 @@ class User < ActiveRecord::Base
 
   # Clears notifications where deleted user is the actor.
   def clear_notifications
-    Notification.where(actor_id: self.id).destroy_all
+    Notification.where(actor_id: id).destroy_all
   end
 
   def send_welcome_email
-    WelcomeEmailJob.perform_later(self.id)
+    WelcomeEmailJob.perform_later(id)
   end
 end
