@@ -76,7 +76,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'rails-controller-testing'
-  gem 'selenium-webdriver', '~> 2.48.1'
+  gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'awesome_print'
   gem 'bundler-audit', '~> 0.6.0'
