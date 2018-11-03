@@ -240,7 +240,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :facebook,      Rails.application.secrets.facebook_api_id.to_s, Rails.application.secrets.facebook_api_secret.to_s
-  config.omniauth :twitter,       Rails.application.secrets.twitter_api_id.to_s,  Rails.application.secrets.twitter_api_secret.to_s
+  # config.omniauth :twitter,       Rails.application.secrets.twitter_api_id.to_s,  Rails.application.secrets.twitter_api_secret.to_s
   config.omniauth :google_oauth2, Rails.application.secrets.google_api_id.to_s,   Rails.application.secrets.google_api_secret.to_s
 
   # ==> Warden configuration

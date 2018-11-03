@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this hook to configure merit parameters
 Merit.setup do |config|
   # Check rules on each request or in background
@@ -19,21 +21,9 @@ Merit.setup do |config|
   config.current_user_method = 'current_user'
 end
 
-#Create application badges (uses https://github.com/norman/ambry)
-[{
-     id: 2,
-     name: 'not-active'},
+# Create application badges (uses https://github.com/norman/ambry)
+Merit::Badge.create!(id: 2,name: 'not-active')
+Merit::Badge.create!(id: 100, name: 'verifierad_medlem', description: 'Titeln ges till medlemmar med verifierade konton', custom_fields: { human_name: 'Verifierad Madlem' })
+Merit::Badge.create!(id: 900, name: 'redaktör', description: 'Titeln ges till medlemmar redaktionen för Torgny.io', custom_fields: { human_name: 'Redaktör' })
 
- {
-     id: (100),
-     name: 'verifierad_medlem',
-     description: 'Titeln ges till medlemmar med verifierade konton',
-     custom_fields: {human_name: 'Verifierad Madlem'}
- }, {
-     id: (900),
-     name: 'redaktör',
-     description: 'Titeln ges till medlemmar redaktionen för Torgny.io',
-     custom_fields: {human_name: 'Redaktör'}
- }].each do |attrs|
-  Merit::Badge.create! attrs
-end
+

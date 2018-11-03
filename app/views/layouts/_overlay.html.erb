@@ -5,19 +5,13 @@
     <ul class="omniauth-button-group">
       <li class="omniauth-button">
         <%= link_to user_facebook_omniauth_authorize_path, class: 'button facebook' do %>
-          <%= icon('facebook-official') %><%= t('headings.sign_in__with', source: 'Facebook') %>
+          <%= icon('fab', 'facebook-official') %><%= t('headings.sign_in__with', source: 'Facebook') %>
         <% end %>
       </li>
 
       <li class="omniauth-button google">
         <%= link_to user_google_oauth2_omniauth_authorize_path, class: 'button google' do %>
-          <%= icon('google') %><%= t('headings.sign_in__with', source: 'Google') %>
-        <% end %>
-      </li>
-
-      <li class="omniauth-button twitter">
-        <%= link_to user_twitter_omniauth_authorize_path, class: 'button twitter' do %>
-          <%= icon('twitter') %><%= t('headings.sign_in__with', source: 'Twitter') %>
+          <%= icon('fab', 'google') %><%= t('headings.sign_in__with', source: 'Google') %>
         <% end %>
       </li>
 
