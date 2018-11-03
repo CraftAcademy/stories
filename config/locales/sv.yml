@@ -46,7 +46,7 @@ sv:
       responded_to_your: reagerade på ditt
       mark_all_as_read: Markera alla som lästa
       started_following_you: började följa dig
-      liked_your: gillade din
+      liked_your: gillade ditt
     length:
       less_than_one_minute: 'läses under en minut'
       minutes_read: läses på ca %{read_time} minuter
