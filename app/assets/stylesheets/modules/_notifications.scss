@@ -12,7 +12,7 @@
     border: 1.5px solid $border-color;
     transition: all .1s;
     @include border-radius($round);
-    i.fa-bell-o,
+    i.fa-bell,
     span#new-notifications-count {
       position: absolute;
       top: 50%;
@@ -113,11 +113,15 @@
     display: inline-block;
   }
 
-  .fa {
+  .far {
     margin-right: 8px;
   }
 
-  .fa-heart-o {
+  .fab {
+    margin-right: 8px;
+  }
+
+  .fa-heart {
     color: #e81c4f;
   }
 
@@ -125,7 +129,7 @@
     color: lightblue;
   }
 
-  .fa-commenting-o {
+  .fa-comment{
     color: $light-font-color;
   }
 }
