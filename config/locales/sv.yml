@@ -85,7 +85,7 @@ sv:
     latest: Senaste
     following: Följer
     is_following: följer
-    is_followed_by: är följd av
+    is_followed_by: följs av
     followers_singular: Följare
     followers_plural: Följare
     follow: Följ
