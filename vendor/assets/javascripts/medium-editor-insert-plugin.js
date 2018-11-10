@@ -777,31 +777,31 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
     var pluginName = 'mediumInsert',
         addonName = 'Embeds', // first char is uppercase
         defaults = {
-            label: '<span class="fa fa-youtube-play"></span>',
-            placeholder: 'Paste a YouTube, Vimeo, Facebook, Twitter or Instagram link and press Enter',
-            oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1',
+            label: '<span class="fab fa-youtube"></span>',
+            placeholder: 'Klipp in länk från YouTube, Vimeo, Facebook, Twitter eller Instagram och tryck på enter',
+            // oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1',
             captions: true,
-            captionPlaceholder: 'Type caption (optional)',
+            captionPlaceholder: 'Bildtext (valfritt)',
             styles: {
                 wide: {
-                    label: '<span class="fa fa-align-justify"></span>',
+                    label: '<span class="fas fa-align-justify"></span>',
                     // added: function ($el) {},
                     // removed: function ($el) {}
                 },
                 left: {
-                    label: '<span class="fa fa-align-left"></span>',
+                    label: '<span class="fas fa-align-left"></span>',
                     // added: function ($el) {},
                     // removed: function ($el) {}
                 },
                 right: {
-                    label: '<span class="fa fa-align-right"></span>',
+                    label: '<span class="fas fa-align-right"></span>',
                     // added: function ($el) {},
                     // removed: function ($el) {}
                 }
             },
             actions: {
                 remove: {
-                    label: '<span class="fa fa-times"></span>',
+                    label: '<span class="fas fa-times"></span>',
                     clicked: function () {
                         var $event = $.Event('keydown');
 

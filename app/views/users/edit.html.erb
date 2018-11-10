@@ -10,7 +10,7 @@
             <%= icon('fab', 'book') %>
             <%= f.text_area :description, rows: 5, cols: 15, autofocus: true, placeholder: t('headings.tell_about_youself') %></p>
           <div class="hero-location">
-            <%= icon('fab', 'map-marker') %>
+            <%= icon('fas', 'fa-map-marker-alt') %>
             <%= f.text_field :location, id: 'autocomplete', onFocus: 'geolocate()', placeholder: t('headings.location_question') %>
           </div>
         </div>
@@ -19,7 +19,7 @@
         <div class="hero-avatar">
           <label class="change-avatar" id="change-avatar" style="background-image: url('<%= @user.avatar.url %>')">
             <%= f.file_field :avatar %>
-            <%= icon(''fab', camera') %>
+            <%= icon('fas', 'fa-camera') %>
           </label>
         </div>
       </header>

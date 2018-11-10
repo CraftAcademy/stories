@@ -1,35 +1,35 @@
 .medium-toolbar-arrow-under:after {
   top: 60px;
-  border-color: #57ad68 transparent transparent transparent; }
+  border-color: #ce661c transparent transparent transparent; }
 
 .medium-toolbar-arrow-over:before {
   top: -8px;
   border-color: transparent transparent #57ad68 transparent; }
 
 .medium-editor-toolbar {
-  background-color: #57ad68; }
+  background-color: #ce661c; }
   .medium-editor-toolbar li {
     padding: 0; }
     .medium-editor-toolbar li button {
       min-width: 60px;
       height: 60px;
       border: none;
-      border-right: 1px solid #9ccea6;
+      border-right: 1px solid #ce661c;
       background-color: transparent;
       color: #fff;
       transition: background-color .2s ease-in, color .2s ease-in; }
       .medium-editor-toolbar li button:hover {
-        background-color: #346a3f;
+        background-color: #a15016;
         color: #fff; }
     .medium-editor-toolbar li .medium-editor-button-active {
-      background-color: #23482a;
+      background-color: #8b4513;
       color: #fff; }
     .medium-editor-toolbar li .medium-editor-button-last {
       border-right: none; }
 
 .medium-editor-toolbar-form .medium-editor-toolbar-input {
   height: 60px;
-  background: #57ad68;
+  background: #ce661c;
   color: #fff; }
 
   .medium-editor-toolbar-form .medium-editor-toolbar-input::placeholder {
