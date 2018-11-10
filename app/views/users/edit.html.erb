@@ -7,10 +7,10 @@
           <h1 class="hero-title"><%= @user.username %></h1>
 
           <p class="hero-description">
-            <%= icon('fab', 'book') %>
+            <%= icon('fas', 'book') %>
             <%= f.text_area :description, rows: 5, cols: 15, autofocus: true, placeholder: t('headings.tell_about_youself') %></p>
           <div class="hero-location">
-            <%= icon('fas', 'fa-map-marker-alt') %>
+            <%= icon('fas', 'map-marker-alt') %>
             <%= f.text_field :location, id: 'autocomplete', onFocus: 'geolocate()', placeholder: t('headings.location_question') %>
           </div>
         </div>
