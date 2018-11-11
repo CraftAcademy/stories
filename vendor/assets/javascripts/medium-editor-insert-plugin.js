@@ -779,7 +779,7 @@ this["MediumInsert"]["Templates"]["src/js/templates/images-toolbar.hbs"] = Handl
         defaults = {
             label: '<span class="fab fa-youtube"></span>',
             placeholder: 'Klipp in länk från YouTube, Vimeo, Facebook, Twitter eller Instagram och tryck på enter',
-            // oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1',
+            oembedProxy: 'http://medium.iframe.ly/api/oembed?iframe=1',
             captions: true,
             captionPlaceholder: 'Bildtext (valfritt)',
             styles: {

@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}/
+    - if Rails.env.production?
+      = javascript_include_tag "ga"
+      %meta{content: "BeOyDz04IQAwcjjeOXR9wZH4JZif8SwyNdRbvPyQy7w", name: "google-site-verification"}/
+
+    %title= t('application.name')
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+  %body{:class => "#{controller.controller_name} #{controller.action_name}"}
+    = render 'layouts/overlay' unless user_signed_in?
+    = react_component('UserOverlay', {})
+    - unless browser.device.mobile?
+      .progress-bar{"data-behavior" => "progress-bar"}
+    - if admin_signed_in?
+      = render 'layouts/admin_header'
+    - else
+      = render 'layouts/header'
+      = render 'layouts/hero_image' if current_page?('/') and !browser.device.mobile?
+    = render 'layouts/alert_messages'
+    .container-fluid.main-container
+      = yield
+      = yield :sidebar
+  :javascript
+    window.userSignedIn = #{user_signed_in?};
+    I18n.defaultLocale = "#{I18n.default_locale}";
+    I18n.locale = "#{I18n.locale}";
+    I18n.fallbacks = true;
+    I18n.locales["sv"] = function (locale) {
+        return ["sv", "en"]
+    }
